@@ -19,6 +19,13 @@ DOCS_ROOT = REPOSITORY_ROOT / "playbook-site" / "docs"
 CATALOG_PATH = DOCS_ROOT / "data" / "playbooks.json"
 GENERATED_PLAYBOOKS_ROOT = DOCS_ROOT / "playbooks"
 SLUG_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+FDE_PUBLICATION_PROCESS_URL = (
+    "https://github.com/WebexCC-SA/FDE-Engagement/blob/main/"
+    "Playbooks/publication-process.md"
+)
+FDE_PUBLICATION_PROCESS_LINK = re.compile(
+    r"\(\.\./publication-process\.md(?P<fragment>#[^)]+)?\)"
+)
 FACET_NAMES = (
     "verticals",
     "channels",
@@ -26,6 +33,19 @@ FACET_NAMES = (
     "customer_journeys",
     "integrations",
 )
+
+
+def rewrite_repository_links(body: str) -> str:
+    """Keep repository-level references valid after a README becomes index.md."""
+
+    body = body.replace(
+        "(../../Skills/",
+        "(https://github.com/ciscoAISCG/webex-cx-ai/tree/main/Skills/",
+    )
+    return FDE_PUBLICATION_PROCESS_LINK.sub(
+        lambda match: f"({FDE_PUBLICATION_PROCESS_URL}{match.group('fragment') or ''})",
+        body,
+    )
 
 
 def load_yaml(path: Path) -> dict[str, Any]:
@@ -100,11 +120,7 @@ def copy_playbook_page(
     if not readme.is_file():
         raise ValueError(f"{playbook_dir} is missing README.md")
 
-    body = readme.read_text(encoding="utf-8")
-    body = body.replace(
-        "(../../Skills/",
-        "(https://github.com/ciscoAISCG/webex-cx-ai/tree/main/Skills/",
-    )
+    body = rewrite_repository_links(readme.read_text(encoding="utf-8"))
     package_url = (
         "https://github.com/WebexCC-SA/FDE-Playbook-Catalog/tree/main/"
         f"Playbooks/{playbook_id}"
