@@ -116,10 +116,16 @@ document.addEventListener("DOMContentLoaded", async () => {
           badge.textContent = labelFor(value);
           badges.appendChild(badge);
         }
+        if (playbook.requiresRebinding) {
+          const badge = document.createElement("span");
+          badge.className = "playbook-badge playbook-badge--warning";
+          badge.textContent = "Rebinding required";
+          badges.appendChild(badge);
+        }
 
         const metadata = document.createElement("p");
         metadata.className = "playbook-meta";
-        metadata.textContent = `${labelFor(playbook.complexity)} · Validated ${
+        metadata.textContent = `${labelFor(playbook.complexity)} · Catalog reviewed ${
           playbook.lastValidated
         }`;
 

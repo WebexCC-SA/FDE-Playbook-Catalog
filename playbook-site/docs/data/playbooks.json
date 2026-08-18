@@ -2,24 +2,71 @@
   "schemaVersion": 1,
   "facets": {
     "verticals": [
+      "education",
+      "energy-utilities",
+      "financial-services",
+      "government",
       "health-care",
-      "retail"
+      "hospitality-hotels-and-leisure",
+      "manufacturing",
+      "media-entertainment",
+      "not-for-profit",
+      "professional-services",
+      "retail",
+      "service-provider",
+      "technical-services",
+      "technology",
+      "transportation",
+      "wholesale-distribution"
     ],
     "channels": [
       "voice",
-      "sms"
+      "chat",
+      "sms",
+      "email",
+      "whatsapp",
+      "facebook",
+      "imessage",
+      "social",
+      "custom"
     ],
     "features": [
+      "autonomous-ai-agent",
+      "scripted-ai-agent",
+      "agent-assist",
       "routing",
+      "knowledge-search",
+      "identity-verification",
+      "appointment-management",
+      "payments",
+      "analytics-reporting",
+      "summarization",
+      "quality-management",
+      "workforce-optimization",
       "outbound-campaigns"
     ],
     "customer_journeys": [
+      "customer-service",
+      "self-service",
+      "scheduling",
+      "authentication",
+      "payments",
+      "order-management",
+      "case-management",
+      "knowledge-support",
       "routing-transfer",
       "proactive-notifications"
     ],
     "integrations": [
       "rest-api",
-      "webhook"
+      "mcp",
+      "service-now",
+      "salesforce",
+      "microsoft-dynamics",
+      "custom-crm",
+      "database",
+      "webhook",
+      "a2a"
     ],
     "complexity": [
       "beginner",
@@ -29,58 +76,117 @@
   },
   "playbooks": [
     {
-      "id": "workflow-demo",
-      "title": "Workflow Demonstration Playbook",
-      "summary": "Synthetic voice-routing playbook used to demonstrate catalog search and filtering.",
-      "verticals": [
-        "health-care"
-      ],
+      "id": "appointment-scheduling",
+      "title": "Appointment Scheduling",
+      "summary": "Schedule, review, and reschedule appointments with an autonomous voice AI agent and Webex Connect fulfillment workflows.",
+      "verticals": [],
       "channels": [
         "voice"
       ],
       "features": [
-        "routing"
+        "autonomous-ai-agent",
+        "appointment-management"
       ],
       "customerJourneys": [
-        "routing-transfer"
+        "self-service",
+        "scheduling"
       ],
-      "integrations": [
-        "rest-api"
-      ],
-      "complexity": "beginner",
+      "integrations": [],
+      "complexity": "intermediate",
       "lastValidated": "2026-08-18",
       "keywords": [
-        "workflow-demo",
-        "catalog-test"
+        "booking",
+        "rescheduling",
+        "webex-connect"
       ],
-      "url": "playbooks/workflow-demo/"
+      "requiresRebinding": true,
+      "url": "playbooks/appointment-scheduling/"
     },
     {
-      "id": "proactive-order-update-demo",
-      "title": "Proactive Order Update Demonstration",
-      "summary": "Synthetic SMS notification playbook used to demonstrate retail, campaign, and webhook filters.",
+      "id": "data-driven-ordering",
+      "title": "Data Driven Ordering",
+      "summary": "Guide callers through a structured menu, validate choices, place an order, and offer a digital fallback.",
       "verticals": [
         "retail"
       ],
       "channels": [
+        "voice",
         "sms"
       ],
       "features": [
-        "outbound-campaigns"
+        "autonomous-ai-agent"
       ],
       "customerJourneys": [
-        "proactive-notifications"
+        "self-service",
+        "order-management"
       ],
-      "integrations": [
-        "webhook"
-      ],
+      "integrations": [],
       "complexity": "intermediate",
       "lastValidated": "2026-08-18",
       "keywords": [
-        "order-update",
-        "catalog-test"
+        "structured-menu",
+        "digital-fallback",
+        "webex-connect"
       ],
-      "url": "playbooks/proactive-order-update-demo/"
+      "requiresRebinding": true,
+      "url": "playbooks/data-driven-ordering/"
+    },
+    {
+      "id": "servicenow-kb-incident-ai-agent-with-mcp",
+      "title": "ServiceNow KB and Incident AI Agent with MCP",
+      "summary": "Search ServiceNow knowledge first, then create, find, update, or delete incidents through MCP-backed actions.",
+      "verticals": [],
+      "channels": [
+        "voice"
+      ],
+      "features": [
+        "autonomous-ai-agent",
+        "knowledge-search"
+      ],
+      "customerJourneys": [
+        "case-management",
+        "knowledge-support"
+      ],
+      "integrations": [
+        "mcp",
+        "service-now"
+      ],
+      "complexity": "advanced",
+      "lastValidated": "2026-08-18",
+      "keywords": [
+        "incident-management",
+        "knowledge-base",
+        "agentic-app"
+      ],
+      "requiresRebinding": true,
+      "url": "playbooks/servicenow-kb-incident-ai-agent-with-mcp/"
+    },
+    {
+      "id": "user-identification-verification",
+      "title": "User Identification and Verification",
+      "summary": "Verify a caller with date of birth, postal code, and optional OTP before protected service journeys continue.",
+      "verticals": [],
+      "channels": [
+        "voice"
+      ],
+      "features": [
+        "autonomous-ai-agent",
+        "identity-verification"
+      ],
+      "customerJourneys": [
+        "authentication"
+      ],
+      "integrations": [],
+      "complexity": "advanced",
+      "lastValidated": "2026-08-18",
+      "keywords": [
+        "idv",
+        "otp",
+        "step-up-verification",
+        "webex-connect"
+      ],
+      "requiresRebinding": true,
+      "url": "playbooks/user-identification-verification/"
     }
   ]
 }

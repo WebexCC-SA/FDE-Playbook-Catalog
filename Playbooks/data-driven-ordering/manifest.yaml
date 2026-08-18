@@ -1,0 +1,47 @@
+schema_version: 1
+id: data-driven-ordering
+title: Data Driven Ordering
+summary: Guide callers through a structured menu, validate choices, place an order, and offer a digital fallback.
+
+classification:
+  verticals:
+    - retail
+  channels:
+    - voice
+    - sms
+  features:
+    - autonomous-ai-agent
+  customer_journeys:
+    - self-service
+    - order-management
+
+complexity: intermediate
+last_validated: "2026-08-18"
+
+ownership:
+  owner: ciscoAISCG
+  maintaining_team: ai-solutions-consulting-group
+
+keywords:
+  - structured-menu
+  - digital-fallback
+  - webex-connect
+
+artifacts:
+  diagrams:
+    - assets/data-driven-ordering-flow.svg
+  exports:
+    - exports/Data_Driven_Ordering.json
+    - exports/Data_Driven_Ordering_Agent.json
+    - exports/Get_Menu.workflow
+    - exports/Place_Order.workflow
+    - exports/Send_Digital_Ordering_Link.workflow
+
+validation:
+  environment: Catalog packaging review of the public upstream snapshot at commit cc2b9cc1f529a043f8f6b94a00e3e3080d83a6db
+  expected_result: The documentation, diagram, and referenced export files are present and render in the catalog.
+
+security:
+  customer_data_removed: true
+  credentials_removed: true
+  tenant_identifiers_removed: false

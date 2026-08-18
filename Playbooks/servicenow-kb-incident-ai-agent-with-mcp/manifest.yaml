@@ -1,0 +1,45 @@
+schema_version: 1
+id: servicenow-kb-incident-ai-agent-with-mcp
+title: ServiceNow KB and Incident AI Agent with MCP
+summary: Search ServiceNow knowledge first, then create, find, update, or delete incidents through MCP-backed actions.
+
+classification:
+  channels:
+    - voice
+  features:
+    - autonomous-ai-agent
+    - knowledge-search
+  customer_journeys:
+    - case-management
+    - knowledge-support
+  integrations:
+    - mcp
+    - service-now
+
+complexity: advanced
+last_validated: "2026-08-18"
+
+ownership:
+  owner: ciscoAISCG
+  maintaining_team: ai-solutions-consulting-group
+
+keywords:
+  - incident-management
+  - knowledge-base
+  - agentic-app
+
+artifacts:
+  diagrams:
+    - assets/servicenow-ai-agent-mcp.svg
+  exports:
+    - servicenow_ai_agent.json
+    - servicenow_voice_flow.json
+
+validation:
+  environment: Catalog packaging review of the public upstream snapshot at commit cc2b9cc1f529a043f8f6b94a00e3e3080d83a6db
+  expected_result: The documentation, diagram, and referenced export files are present and render in the catalog.
+
+security:
+  customer_data_removed: true
+  credentials_removed: true
+  tenant_identifiers_removed: false

@@ -1,0 +1,155 @@
+# Central metadata contract and controlled vocabulary for FDE playbooks.
+# Display labels can be generated from these normalized YAML values.
+
+schema_version: 1
+
+metadata_contract:
+  required:
+    id:
+      type: slug
+      description: Stable lowercase identifier; must match the playbook folder name.
+    title:
+      type: string
+      description: Human-readable playbook title.
+    summary:
+      type: string
+      description: Short customer-safe description used in search results.
+    classification.features:
+      type: array
+      min_items: 1
+      values_from: facets.features
+    classification.customer_journeys:
+      type: array
+      min_items: 1
+      values_from: facets.customer_journeys
+    complexity:
+      type: enum
+      values_from: facets.complexity
+    last_validated:
+      type: date
+      format: YYYY-MM-DD
+    ownership.owner:
+      type: string
+      description: GitHub login or approved owner identifier.
+    ownership.maintaining_team:
+      type: slug
+      description: Team accountable for upkeep and revalidation.
+
+  optional:
+    classification.verticals:
+      type: array
+      values_from: facets.verticals
+      description: Omit for an industry-neutral playbook.
+    classification.channels:
+      type: array
+      values_from: facets.channels
+      description: Omit when the playbook is not channel-specific.
+    classification.integrations:
+      type: array
+      values_from: facets.integrations
+      description: Omit when no external integration applies.
+    keywords:
+      type: array
+      item_type: slug
+      description: Search terms not already represented by controlled facets.
+
+facets:
+  verticals:
+    - education
+    - energy-utilities
+    - financial-services
+    - government
+    - health-care
+    - hospitality-hotels-and-leisure
+    - manufacturing
+    - media-entertainment
+    - not-for-profit
+    - professional-services
+    - retail
+    - service-provider
+    - technical-services
+    - technology
+    - transportation
+    - wholesale-distribution
+
+  channels:
+    - voice
+    - chat
+    - sms
+    - email
+    - whatsapp
+    - facebook
+    - imessage
+    - social
+    - custom
+
+  features:
+    - autonomous-ai-agent
+    - scripted-ai-agent
+    - agent-assist
+    - routing
+    - knowledge-search
+    - identity-verification
+    - appointment-management
+    - payments
+    - analytics-reporting
+    - summarization
+    - quality-management
+    - workforce-optimization
+    - outbound-campaigns
+
+  customer_journeys:
+    - customer-service
+    - self-service
+    - scheduling
+    - authentication
+    - payments
+    - order-management
+    - case-management
+    - knowledge-support
+    - routing-transfer
+    - proactive-notifications
+
+  integrations:
+    - rest-api
+    - mcp
+    - service-now
+    - salesforce
+    - microsoft-dynamics
+    - custom-crm
+    - database
+    - webhook
+    - a2a
+
+  complexity:
+    - beginner
+    - intermediate
+    - advanced
+
+example_playbook_metadata:
+  schema_version: 1
+  id: appointment-reminder
+  title: Appointment Reminder
+  summary: Send proactive appointment reminders and route customer responses.
+  classification:
+    verticals:
+      - health-care
+    channels:
+      - sms
+    features:
+      - appointment-management
+      - outbound-campaigns
+    customer_journeys:
+      - scheduling
+      - proactive-notifications
+    integrations:
+      - rest-api
+      - webhook
+  complexity: intermediate
+  last_validated: "2026-08-11"
+  ownership:
+    owner: github-login
+    maintaining_team: fde-team
+  keywords:
+    - appointment-reminder
+    - proactive-messaging
