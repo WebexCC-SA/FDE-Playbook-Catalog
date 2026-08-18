@@ -1,6 +1,8 @@
 # Webex Contact Center Playbooks
 
-Find validated, reusable implementation playbooks.
+Search public Webex Contact Center reference playbooks by use case, channel,
+feature, customer journey, integration, and complexity. Catalog samples may
+still require tenant-specific rebinding and implementation validation.
 
 <div class="playbook-catalog">
   <label class="search-label" for="playbook-search">Search playbooks</label>

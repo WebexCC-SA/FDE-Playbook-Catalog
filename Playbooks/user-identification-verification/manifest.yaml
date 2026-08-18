@@ -1,0 +1,43 @@
+schema_version: 1
+id: user-identification-verification
+title: User Identification and Verification
+summary: Verify a caller with date of birth, postal code, and optional OTP before protected service journeys continue.
+
+classification:
+  channels:
+    - voice
+  features:
+    - autonomous-ai-agent
+    - identity-verification
+  customer_journeys:
+    - authentication
+
+complexity: advanced
+last_validated: "2026-08-18"
+
+ownership:
+  owner: ciscoAISCG
+  maintaining_team: ai-solutions-consulting-group
+
+keywords:
+  - idv
+  - otp
+  - step-up-verification
+  - webex-connect
+
+artifacts:
+  diagrams:
+    - assets/idv-agent-flow.svg
+  exports:
+    - exports/Authenticate_User.workflow
+    - exports/User_Identification_Verification.json
+    - exports/Generic_AI_Agent_Flow.json
+
+validation:
+  environment: Catalog packaging review of the public upstream snapshot at commit cc2b9cc1f529a043f8f6b94a00e3e3080d83a6db
+  expected_result: The documentation, diagram, and referenced export files are present and render in the catalog.
+
+security:
+  customer_data_removed: true
+  credentials_removed: true
+  tenant_identifiers_removed: false

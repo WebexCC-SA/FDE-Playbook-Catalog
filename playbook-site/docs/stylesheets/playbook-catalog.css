@@ -100,6 +100,15 @@
   font-size: 0.7rem;
 }
 
+.playbook-badge--warning {
+  background: rgba(214, 138, 48, 0.18);
+  color: #b35d00;
+}
+
+[data-md-color-scheme="slate"] .playbook-badge--warning {
+  color: #ffb45c;
+}
+
 .playbook-meta {
   margin-top: auto;
   color: var(--md-default-fg-color--light);
