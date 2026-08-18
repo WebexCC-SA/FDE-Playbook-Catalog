@@ -103,6 +103,28 @@
       "url": "playbooks/appointment-scheduling/"
     },
     {
+      "id": "catalog-publication-test",
+      "title": "Catalog Publication Test",
+      "summary": "Verify that a merged and labeled FDE playbook PR creates a validated draft PR in the public playbook catalog.",
+      "verticals": [],
+      "channels": [],
+      "features": [
+        "routing"
+      ],
+      "customerJourneys": [
+        "routing-transfer"
+      ],
+      "integrations": [],
+      "complexity": "beginner",
+      "lastValidated": "2026-08-18",
+      "keywords": [
+        "catalog-publication",
+        "workflow-validation"
+      ],
+      "requiresRebinding": false,
+      "url": "playbooks/catalog-publication-test/"
+    },
+    {
       "id": "data-driven-ordering",
       "title": "Data Driven Ordering",
       "summary": "Guide callers through a structured menu, validate choices, place an order, and offer a digital fallback.",
