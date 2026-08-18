@@ -1,0 +1,45 @@
+site_name: FDE Playbook Catalog
+site_description: Searchable Webex Contact Center playbook catalog
+site_url: https://webexcc-sa.github.io/FDE-Playbook-Catalog/
+
+docs_dir: docs
+use_directory_urls: true
+
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.top
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+nav:
+  - Playbooks: index.md
+
+extra:
+  generator: false
+
+extra_css:
+  - stylesheets/playbook-catalog.css
+
+extra_javascript:
+  - javascripts/playbook-catalog.js
+
+markdown_extensions:
+  - md_in_html
+  - attr_list
+
+plugins: []

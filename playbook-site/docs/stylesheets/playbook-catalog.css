@@ -1,0 +1,130 @@
+:root {
+  --md-primary-fg-color: #2f3a45;
+  --md-primary-fg-color--light: #3b4753;
+  --md-primary-fg-color--dark: #232b33;
+  --md-accent-fg-color: #5c8d89;
+  --md-typeset-a-color: #5c8d89;
+}
+
+.md-main__inner {
+  max-width: 1400px;
+}
+
+.md-sidebar {
+  display: none;
+}
+
+.md-content {
+  margin-left: 0;
+}
+
+.search-label,
+.playbook-filters label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-weight: 600;
+}
+
+.playbook-search {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  margin: 0.4rem 0 1rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.4rem;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+}
+
+.playbook-filters {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.playbook-filters select {
+  padding: 0.65rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.35rem;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+}
+
+.catalog-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1.2rem 0;
+}
+
+.catalog-actions button {
+  padding: 0.55rem 0.85rem;
+  border: 1px solid var(--md-accent-fg-color);
+  border-radius: 0.35rem;
+  background: transparent;
+  color: var(--md-accent-fg-color);
+  cursor: pointer;
+}
+
+.playbook-results {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.playbook-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.2rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.5rem;
+  background: var(--md-code-bg-color);
+}
+
+.playbook-card h2 {
+  margin: 0 0 0.5rem;
+}
+
+.playbook-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.8rem 0;
+}
+
+.playbook-badge {
+  padding: 0.2rem 0.55rem;
+  border-radius: 1rem;
+  background: rgba(92, 141, 137, 0.16);
+  color: var(--md-accent-fg-color);
+  font-size: 0.7rem;
+}
+
+.playbook-meta {
+  margin-top: auto;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.75rem;
+}
+
+.playbook-link {
+  margin-top: 0.8rem;
+  font-weight: 600;
+}
+
+.playbook-empty {
+  padding: 2rem;
+  text-align: center;
+}
+
+@media screen and (max-width: 800px) {
+  .playbook-filters,
+  .playbook-results {
+    grid-template-columns: 1fr;
+  }
+
+  .catalog-actions {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+}

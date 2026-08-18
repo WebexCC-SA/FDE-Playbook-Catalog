@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "facets": {
+    "verticals": [
+      "health-care",
+      "retail"
+    ],
+    "channels": [
+      "voice",
+      "sms"
+    ],
+    "features": [
+      "routing",
+      "outbound-campaigns"
+    ],
+    "customer_journeys": [
+      "routing-transfer",
+      "proactive-notifications"
+    ],
+    "integrations": [
+      "rest-api",
+      "webhook"
+    ],
+    "complexity": [
+      "beginner",
+      "intermediate",
+      "advanced"
+    ]
+  },
+  "playbooks": [
+    {
+      "id": "workflow-demo",
+      "title": "Workflow Demonstration Playbook",
+      "summary": "Synthetic voice-routing playbook used to demonstrate catalog search and filtering.",
+      "verticals": [
+        "health-care"
+      ],
+      "channels": [
+        "voice"
+      ],
+      "features": [
+        "routing"
+      ],
+      "customerJourneys": [
+        "routing-transfer"
+      ],
+      "integrations": [
+        "rest-api"
+      ],
+      "complexity": "beginner",
+      "lastValidated": "2026-08-18",
+      "keywords": [
+        "workflow-demo",
+        "catalog-test"
+      ],
+      "url": "playbooks/workflow-demo/"
+    },
+    {
+      "id": "proactive-order-update-demo",
+      "title": "Proactive Order Update Demonstration",
+      "summary": "Synthetic SMS notification playbook used to demonstrate retail, campaign, and webhook filters.",
+      "verticals": [
+        "retail"
+      ],
+      "channels": [
+        "sms"
+      ],
+      "features": [
+        "outbound-campaigns"
+      ],
+      "customerJourneys": [
+        "proactive-notifications"
+      ],
+      "integrations": [
+        "webhook"
+      ],
+      "complexity": "intermediate",
+      "lastValidated": "2026-08-18",
+      "keywords": [
+        "order-update",
+        "catalog-test"
+      ],
+      "url": "playbooks/proactive-order-update-demo/"
+    }
+  ]
+}
