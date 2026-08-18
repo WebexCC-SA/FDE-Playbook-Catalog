@@ -88,7 +88,9 @@ def validate_facets(
     return result
 
 
-def copy_playbook_page(playbook_dir: Path, playbook_id: str) -> None:
+def copy_playbook_page(
+    playbook_dir: Path, playbook_id: str, *, requires_rebinding: bool
+) -> None:
     destination = GENERATED_PLAYBOOKS_ROOT / playbook_id
     if destination.exists():
         shutil.rmtree(destination)
@@ -107,13 +109,15 @@ def copy_playbook_page(playbook_dir: Path, playbook_id: str) -> None:
         "https://github.com/WebexCC-SA/FDE-Playbook-Catalog/tree/main/"
         f"Playbooks/{playbook_id}"
     )
-    notice = (
-        "> **Catalog sample:** Imported from the public "
-        "[`ciscoAISCG/webex-cx-ai` playbooks]"
-        "(https://github.com/ciscoAISCG/webex-cx-ai/tree/main/Playbooks). "
-        "Review and rebind tenant-specific references before use. "
-        f"[View the canonical package files]({package_url}).\n\n"
-    )
+    notice = ""
+    if requires_rebinding:
+        notice = (
+            "> **Catalog sample:** Imported from the public "
+            "[`ciscoAISCG/webex-cx-ai` playbooks]"
+            "(https://github.com/ciscoAISCG/webex-cx-ai/tree/main/Playbooks). "
+            "Review and rebind tenant-specific references before use. "
+            f"[View the canonical package files]({package_url}).\n\n"
+        )
     (destination / "index.md").write_text(notice + body, encoding="utf-8")
     readme.unlink()
 
@@ -163,8 +167,9 @@ def build_catalog() -> dict[str, Any]:
             isinstance(security, dict)
             and security.get("tenant_identifiers_removed") is True
         )
-
-        copy_playbook_page(playbook_dir, playbook_id)
+        copy_playbook_page(
+            playbook_dir, playbook_id, requires_rebinding=requires_rebinding
+        )
         records.append(
             {
                 "id": playbook_id,
