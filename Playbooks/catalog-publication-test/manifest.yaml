@@ -1,0 +1,34 @@
+schema_version: 1
+id: catalog-publication-test
+title: Catalog Publication Test
+summary: Verify that a merged and labeled FDE playbook PR creates a validated draft PR in the public playbook catalog.
+
+classification:
+  features:
+    - routing
+  customer_journeys:
+    - routing-transfer
+
+complexity: beginner
+last_validated: "2026-08-18"
+
+ownership:
+  owner: dbokatov
+  maintaining_team: fde-team
+
+keywords:
+  - catalog-publication
+  - workflow-validation
+
+artifacts:
+  tests:
+    - validation/expected-result.txt
+
+validation:
+  environment: GitHub Actions in WebexCC-SA/FDE-Engagement and WebexCC-SA/FDE-Playbook-Catalog
+  expected_result: A draft catalog PR is created for this package and its catalog validation check passes.
+
+security:
+  customer_data_removed: true
+  credentials_removed: true
+  tenant_identifiers_removed: true
