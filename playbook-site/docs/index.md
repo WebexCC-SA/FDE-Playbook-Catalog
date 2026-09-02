@@ -1,8 +1,8 @@
 # Webex Contact Center Playbooks
 
 Search public Webex Contact Center reference playbooks by use case, channel,
-feature, customer journey, integration, and complexity. Catalog samples may
-still require tenant-specific rebinding and implementation validation.
+feature, customer journey, integration, and complexity. Published playbooks
+have completed the catalog review process.
 
 <div class="playbook-catalog">
   <label class="search-label" for="playbook-search">Search playbooks</label>
@@ -66,7 +66,7 @@ still require tenant-specific rebinding and implementation validation.
   <div id="playbook-results" class="playbook-results"></div>
 
   <div id="playbook-empty-state" class="playbook-empty" hidden>
-    <h2>No matching playbooks</h2>
-    <p>Try removing a filter or using a broader search term.</p>
+    <h2 id="playbook-empty-title">No matching playbooks</h2>
+    <p id="playbook-empty-message">Try removing a filter or using a broader search term.</p>
   </div>
 </div>
