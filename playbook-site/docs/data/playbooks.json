@@ -74,5 +74,37 @@
       "advanced"
     ]
   },
-  "playbooks": []
+  "playbooks": [
+    {
+      "id": "consult-transfer-summary-to-webex",
+      "title": "Send a Webex Contact Center Consult Summary to the Consulted Webex User",
+      "summary": "Resolve the user selected for a voice consult and send that person the MID_CALL AI summary as a direct Webex message.",
+      "verticals": [],
+      "channels": [
+        "voice"
+      ],
+      "features": [
+        "summarization",
+        "routing"
+      ],
+      "customerJourneys": [
+        "routing-transfer"
+      ],
+      "integrations": [
+        "rest-api",
+        "webhook"
+      ],
+      "complexity": "advanced",
+      "lastValidated": "2026-09-02",
+      "keywords": [
+        "consult-transfer",
+        "mid-call-summary",
+        "webex-messaging",
+        "ai-assistant-transfer-summary",
+        "ai-assistant-mid-call-summary"
+      ],
+      "requiresRebinding": false,
+      "url": "playbooks/consult-transfer-summary-to-webex/"
+    }
+  ]
 }
