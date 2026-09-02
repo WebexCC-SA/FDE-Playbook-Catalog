@@ -4,9 +4,8 @@ Searchable catalog of Webex Contact Center playbooks.
 
 Canonical packages live under `Playbooks/<playbook-id>/`. The catalog builder
 reads each `manifest.yaml`, generates the search index, and copies its README
-and supporting files into the MkDocs site. Imported upstream samples are
-catalog demonstrations and may still require tenant-specific rebinding and
-implementation validation.
+and supporting files into the MkDocs site. Only reviewed, customer-safe
+playbooks should be added to the catalog.
 
 ## Local preview
 

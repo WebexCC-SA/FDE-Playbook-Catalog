@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const results = document.querySelector("#playbook-results");
   const resultCount = document.querySelector("#playbook-result-count");
   const emptyState = document.querySelector("#playbook-empty-state");
+  const emptyTitle = document.querySelector("#playbook-empty-title");
+  const emptyMessage = document.querySelector("#playbook-empty-message");
   const clearButton = document.querySelector("#clear-filters");
 
   const filters = {
@@ -88,9 +90,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const render = () => {
       const matchingPlaybooks = playbooks.filter(matches);
-      resultCount.textContent = `${matchingPlaybooks.length} playbook${
-        matchingPlaybooks.length === 1 ? "" : "s"
-      } found`;
+      if (playbooks.length === 0) {
+        resultCount.textContent = "0 playbooks published";
+        emptyTitle.textContent = "No playbooks published yet";
+        emptyMessage.textContent =
+          "The first production playbooks will appear here after review and publication.";
+      } else {
+        resultCount.textContent = `${matchingPlaybooks.length} playbook${
+          matchingPlaybooks.length === 1 ? "" : "s"
+        } found`;
+        emptyTitle.textContent = "No matching playbooks";
+        emptyMessage.textContent =
+          "Try removing a filter or using a broader search term.";
+      }
       results.replaceChildren();
       emptyState.hidden = matchingPlaybooks.length !== 0;
 

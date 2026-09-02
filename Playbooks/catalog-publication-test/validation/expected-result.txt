@@ -1,1 +1,0 @@
-Expected result: the source publisher creates one validated draft catalog pull request for Playbooks/catalog-publication-test from the exact merged source commit.
