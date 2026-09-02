@@ -13,18 +13,34 @@ The webhook `data.destination` is the original entry-point DNIS. It is **not** t
 The same architecture is available as a Mermaid schema for documentation systems that render Mermaid:
 
 ```mermaid
-flowchart LR
-    A[Agent starts consult in Webex CC] -->|task:consulting webhook| B[Hosted HTTPS listener]
-    B -->|taskId| C[Agent Summaries API<br/>MID_CALL]
-    B -->|taskId| D[Search API<br/>task legs]
-    D -->|nextDestination.agent.phoneNumber| E{Destination rule}
-    E -->|short internal dial string| F[Keep last EXTENSION_LENGTH digits]
-    E -->|10+ digits / formatted PSTN| G[Preserve supplied number]
-    F --> H[Webex Calling Numbers API]
-    G --> H
-    H -->|owner.id, owner.type=PEOPLE| B
-    C --> B
-    B -->|POST /v1/messages| I[Consulted Webex user]
+flowchart TD
+    A[Agent starts a consult in Webex Contact Center]
+    B[Hosted HTTPS listener receives task:consulting]
+    C[Use data.taskId as the interaction ID]
+    D[Request the MID_CALL summary]
+    E[Query Search API task legs]
+    F[Read nextDestination.agent.phoneNumber]
+    G{Consult destination format}
+    H[Keep the last EXTENSION_LENGTH digits]
+    I[Preserve the supplied PSTN number]
+    J[Query Webex Calling Numbers API]
+    K[Require one PEOPLE owner and read owner.id]
+    L[POST the formatted summary to /v1/messages]
+    M[Consulted Webex user receives the summary]
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
+    F --> G
+    G -->|Short internal dial string| H
+    G -->|10+ digits or formatted PSTN| I
+    H --> J
+    I --> J
+    J --> K
+    K --> L
+    L --> M
 ```
 
 ## Owner and maintenance
