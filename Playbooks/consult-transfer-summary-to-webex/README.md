@@ -10,23 +10,6 @@ The webhook `data.destination` is the original entry-point DNIS. It is **not** t
 
 ![Architecture showing the consult event, listener, Webex APIs, and direct Webex message](assets/architecture.svg)
 
-The same architecture is available as a Mermaid schema for documentation systems that render Mermaid:
-
-```mermaid
-flowchart LR
-    A[Agent starts consult in Webex CC] -->|task:consulting webhook| B[Hosted HTTPS listener]
-    B -->|taskId| C[Agent Summaries API<br/>MID_CALL]
-    B -->|taskId| D[Search API<br/>task legs]
-    D -->|nextDestination.agent.phoneNumber| E{Destination rule}
-    E -->|short internal dial string| F[Keep last EXTENSION_LENGTH digits]
-    E -->|10+ digits / formatted PSTN| G[Preserve supplied number]
-    F --> H[Webex Calling Numbers API]
-    G --> H
-    H -->|owner.id, owner.type=PEOPLE| B
-    C --> B
-    B -->|POST /v1/messages| I[Consulted Webex user]
-```
-
 ## Owner and maintenance
 
 - Author: Dimitri Bokatov (`dbokatov`)

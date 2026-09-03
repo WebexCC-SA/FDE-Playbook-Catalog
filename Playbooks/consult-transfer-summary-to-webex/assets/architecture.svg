@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="720" viewBox="0 0 1600 720" role="img" aria-labelledby="title description">
   <title id="title">Webex Contact Center consult summary delivery architecture</title>
-  <desc id="description">A consult event reaches a hosted listener. The listener obtains the MID_CALL summary and consult destination, resolves the destination with Webex Calling, and sends a direct Webex message.</desc>
+  <desc id="description">A consult event reaches a hosted listener. The listener obtains the MID_CALL summary and consult destination, resolves the destination with Webex Calling, and sends a direct message to the selected Webex App user.</desc>
   <defs>
     <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#f7fbff"/>
@@ -22,7 +22,7 @@
     </style>
   </defs>
   <rect width="1600" height="720" fill="url(#background)"/>
-  <text x="80" y="76" class="title">Consult summary delivery to the selected Webex user</text>
+  <text x="80" y="76" class="title">Consult summary delivery to the selected Webex App user</text>
   <text x="80" y="108" class="subtitle">Validated POC flow for Webex Contact Center voice consults</text>
 
   <g filter="url(#shadow)">
@@ -81,7 +81,10 @@
   <path d="M755 270 C800 270 800 210 850 210" fill="none" stroke="#3477a9" stroke-width="4" marker-end="url(#arrow)"/>
   <path d="M850 250 C800 250 800 310 755 310" fill="none" stroke="#3477a9" stroke-width="4" marker-end="url(#arrow)"/>
   <path d="M755 390 H850" fill="none" stroke="#3477a9" stroke-width="4" marker-end="url(#arrow)"/>
-  <path d="M1150 440 C1200 440 1200 360 1265 360" fill="none" stroke="#3477a9" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M850 480 C805 480 805 430 755 430" fill="none" stroke="#3477a9" stroke-width="4" marker-end="url(#arrow)"/>
+  <text x="800" y="472" text-anchor="middle" class="arrow-label">owner.id</text>
+  <path d="M755 330 H1265" fill="none" stroke="#3477a9" stroke-width="4" marker-end="url(#arrow)"/>
+  <text x="1010" y="315" text-anchor="middle" class="arrow-label">POST /v1/messages</text>
 
   <g>
     <rect x="405" y="560" width="745" height="92" rx="16" fill="#16324f"/>
