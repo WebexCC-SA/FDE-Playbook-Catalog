@@ -38,10 +38,12 @@ artifacts:
   samples:
     - assets/agent-consult-sanitized.png
     - assets/webex-summary-sanitized.png
+    - downloads/call-summary-transfer-lambda.zip
     - samples/lambda/.gitignore
     - samples/lambda/esbuild.mjs
     - samples/lambda/package.json
     - samples/lambda/package-lock.json
+    - samples/lambda/README.md
     - samples/lambda/sample-events/task-consulting.json
     - samples/lambda/src/index.ts
     - samples/lambda/tsconfig.json
