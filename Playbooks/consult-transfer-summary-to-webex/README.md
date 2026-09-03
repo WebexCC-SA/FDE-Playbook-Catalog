@@ -79,7 +79,12 @@ If webhook registration is performed with a separate administrator credential, t
 
 ### 3. Host the listener
 
-The reusable implementation is in [`samples/lambda`](samples/lambda). It uses this flow:
+Download or inspect the complete reusable implementation:
+
+- [Download the TypeScript/AWS SAM source project (ZIP)](downloads/call-summary-transfer-lambda.zip)
+- [Browse the source files on GitHub](https://github.com/WebexCC-SA/FDE-Playbook-Catalog/tree/main/Playbooks/consult-transfer-summary-to-webex/samples/lambda)
+
+The source project uses this flow:
 
 ```text
 Webex CC webhook
