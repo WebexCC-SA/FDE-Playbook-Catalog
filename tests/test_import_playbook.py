@@ -45,8 +45,12 @@ class ImportPlaybookTests(unittest.TestCase):
         package = self.source / "Playbooks" / "demo-playbook"
         (package / "flows").mkdir(parents=True)
         (self.catalog / "Playbooks").mkdir(parents=True)
+        self.taxonomy = "schema_version: 1\nfacets: {}\n"
         (self.source / "Playbooks" / "taxonomy.yaml").write_text(
-            "schema_version: 1\nfacets: {}\n", encoding="utf-8"
+            self.taxonomy, encoding="utf-8"
+        )
+        (self.catalog / "Playbooks" / "taxonomy.yaml").write_text(
+            self.taxonomy, encoding="utf-8"
         )
         (package / "manifest.yaml").write_text(MANIFEST, encoding="utf-8")
         (package / "README.md").write_text("# Demo\n", encoding="utf-8")
@@ -55,7 +59,7 @@ class ImportPlaybookTests(unittest.TestCase):
     def tearDown(self) -> None:
         self.temporary.cleanup()
 
-    def test_imports_declared_package_and_taxonomy(self) -> None:
+    def test_imports_declared_package_with_matching_taxonomy(self) -> None:
         playbook_id = import_playbook(
             self.source,
             self.catalog,
@@ -65,7 +69,23 @@ class ImportPlaybookTests(unittest.TestCase):
         self.assertTrue(
             (self.catalog / "Playbooks" / "demo-playbook" / "flows" / "demo.json").is_file()
         )
-        self.assertTrue((self.catalog / "Playbooks" / "taxonomy.yaml").is_file())
+        self.assertEqual(
+            (self.catalog / "Playbooks" / "taxonomy.yaml").read_text(
+                encoding="utf-8"
+            ),
+            self.taxonomy,
+        )
+
+    def test_rejects_taxonomy_drift(self) -> None:
+        (self.source / "Playbooks" / "taxonomy.yaml").write_text(
+            "schema_version: 2\nfacets: {}\n", encoding="utf-8"
+        )
+        with self.assertRaisesRegex(ImportFailure, "catalog taxonomy migration"):
+            import_playbook(
+                self.source,
+                self.catalog,
+                ["Playbooks/demo-playbook/manifest.yaml"],
+            )
 
     def test_rejects_unlisted_file(self) -> None:
         (self.source / "Playbooks" / "demo-playbook" / "secret.txt").write_text(

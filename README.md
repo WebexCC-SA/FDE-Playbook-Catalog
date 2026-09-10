@@ -19,3 +19,23 @@ mkdocs serve
 ```
 
 Open `http://127.0.0.1:8000/`.
+
+## Taxonomy migrations
+
+The catalog taxonomy must match the canonical
+`WebexCC-SA/FDE-Engagement/Playbooks/taxonomy.yaml` contract. A normal
+single-playbook import never replaces the catalog taxonomy implicitly.
+
+When the canonical taxonomy changes:
+
+1. Open a dedicated catalog pull request that updates
+   `Playbooks/taxonomy.yaml` and migrates every existing manifest affected by
+   removed or renamed values.
+2. Run the importer tests, regenerate the catalog, and build MkDocs with
+   strict validation.
+3. Review and merge the taxonomy migration before retrying publication of a
+   playbook that uses the new contract.
+
+If the source and catalog taxonomies differ, the importer stops with a
+`catalog taxonomy migration` error instead of mixing incompatible manifest
+versions.

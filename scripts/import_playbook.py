@@ -2,8 +2,10 @@
 """Import one approved FDE playbook package into the public catalog.
 
 The script is intentionally strict: a publication may change exactly one
-``Playbooks/<id>/`` package, plus the central taxonomy. Only README.md,
-manifest.yaml, and files explicitly declared under ``artifacts`` are copied.
+``Playbooks/<id>/`` package. A source PR may also change the central taxonomy,
+but the catalog taxonomy must be migrated and reviewed separately before a
+playbook using that taxonomy can be imported. Only README.md, manifest.yaml,
+and files explicitly declared under ``artifacts`` are copied.
 """
 
 from __future__ import annotations
@@ -181,6 +183,22 @@ def regular_taxonomy(source_root: Path) -> Path:
     return taxonomy
 
 
+def require_matching_taxonomy(source_root: Path, catalog_root: Path) -> None:
+    """Require an explicit catalog migration before using a new taxonomy."""
+
+    source_taxonomy = regular_taxonomy(source_root)
+    catalog_taxonomy = catalog_root / "Playbooks" / "taxonomy.yaml"
+    if not catalog_taxonomy.is_file() or catalog_taxonomy.is_symlink():
+        raise ImportFailure(
+            "catalog Playbooks/taxonomy.yaml must be a regular file"
+        )
+    if load_yaml(source_taxonomy) != load_yaml(catalog_taxonomy):
+        raise ImportFailure(
+            "source and catalog taxonomies differ; merge an explicit catalog "
+            "taxonomy migration before publishing a playbook"
+        )
+
+
 def import_playbook(
     source_root: Path,
     catalog_root: Path,
@@ -190,7 +208,7 @@ def import_playbook(
     catalog_root = catalog_root.resolve()
     playbook_id = changed_playbook_id(changed_paths)
     package, artifacts = validate_source_package(source_root, playbook_id)
-    taxonomy = regular_taxonomy(source_root)
+    require_matching_taxonomy(source_root, catalog_root)
 
     catalog_playbooks = catalog_root / "Playbooks"
     if not catalog_playbooks.is_dir():
@@ -211,7 +229,6 @@ def import_playbook(
             shutil.rmtree(target)
         shutil.move(str(staged), target)
 
-    shutil.copy2(taxonomy, catalog_playbooks / "taxonomy.yaml")
     return playbook_id
 
 

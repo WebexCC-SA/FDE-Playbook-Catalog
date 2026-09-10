@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "facets": {
     "verticals": [
       "education",
@@ -31,19 +31,18 @@
       "custom"
     ],
     "features": [
-      "autonomous-ai-agent",
-      "scripted-ai-agent",
-      "agent-assist",
-      "routing",
-      "knowledge-search",
-      "identity-verification",
-      "appointment-management",
-      "payments",
-      "analytics-reporting",
-      "summarization",
-      "quality-management",
-      "workforce-optimization",
-      "outbound-campaigns"
+      "ai-assistant-topic-analytics",
+      "ai-assistant-suggested-responses",
+      "ai-assistant-wrap-up-summary",
+      "ai-quality-management",
+      "ai-assistant-dropped-call-and-transfer-summary",
+      "ai-assistant-agent-wellbeing",
+      "ai-assistant-real-time-transcript",
+      "ai-assistant-autocsat",
+      "ai-agent-scripted-voice",
+      "ai-agent-autonomous-voice",
+      "ai-agent-scripted-digital",
+      "ai-agent-autonomous-digital"
     ],
     "customer_journeys": [
       "customer-service",
@@ -84,8 +83,7 @@
         "voice"
       ],
       "features": [
-        "summarization",
-        "routing"
+        "ai-assistant-dropped-call-and-transfer-summary"
       ],
       "customerJourneys": [
         "routing-transfer"
