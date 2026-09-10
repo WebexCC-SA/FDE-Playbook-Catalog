@@ -1,4 +1,4 @@
-schema_version: 1
+schema_version: 2
 id: consult-transfer-summary-to-webex
 title: Send a Webex Contact Center Consult Summary to the Consulted Webex User
 summary: Resolve the user selected for a voice consult and send that person the MID_CALL AI summary as a direct Webex message.
@@ -7,8 +7,7 @@ classification:
   channels:
     - voice
   features:
-    - summarization
-    - routing
+    - ai-assistant-dropped-call-and-transfer-summary
   customer_journeys:
     - routing-transfer
   integrations:
