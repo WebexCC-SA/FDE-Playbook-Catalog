@@ -103,6 +103,34 @@
       ],
       "requiresRebinding": false,
       "url": "playbooks/consult-transfer-summary-to-webex/"
+    },
+    {
+      "id": "post-call-ai-summary-reporting",
+      "title": "Retrieve AI Assistant Post-Call Summaries for Supervisor Reporting",
+      "summary": "Retrieve AI Assistant wrap-up summaries after contact completion and expose selected fields through a historical Analyzer report for supervisor visibility.",
+      "verticals": [],
+      "channels": [
+        "voice"
+      ],
+      "features": [
+        "ai-assistant-wrap-up-summary"
+      ],
+      "customerJourneys": [
+        "customer-service"
+      ],
+      "integrations": [
+        "rest-api"
+      ],
+      "complexity": "intermediate",
+      "lastValidated": "2026-08-03",
+      "keywords": [
+        "post-call-summary",
+        "supervisor-desktop",
+        "analyzer-report",
+        "historical-reporting"
+      ],
+      "requiresRebinding": false,
+      "url": "playbooks/post-call-ai-summary-reporting/"
     }
   ]
 }
