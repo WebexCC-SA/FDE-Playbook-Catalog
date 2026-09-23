@@ -8,6 +8,7 @@ classification:
     - voice
   features:
     - ai-assistant-dropped-call-and-transfer-summary
+    - ai-assistant-real-time-transcript
   customer_journeys:
     - routing-transfer
   integrations:
@@ -26,8 +27,8 @@ keywords:
   - mid-call-summary
   - webex-messaging
   - ai-assistant-transfer-summary
-  - ai-assistant-mid-call-summary
-
+  - ai-assistant-mid-call-summary  
+  
 artifacts:
   flows:
     - assets/architecture.svg
