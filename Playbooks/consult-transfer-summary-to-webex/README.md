@@ -1,10 +1,10 @@
-# Send a Consult Summary to the Consulted Webex User
+# Send Mid Call Consult Summaries to Webex Users with "task:consulting" webhook
 
 ## Summary
 
 This playbook sends the Webex Contact Center AI-generated `MID_CALL` summary directly to the Webex user selected for a voice consult. It solves the handoff gap where the consulted user receives the call but may not have the caller context already captured by the first agent.
 
-When the agent starts a consult, Webex Contact Center sends a `task:consulting` webhook to a hosted HTTPS listener. The listener uses the webhook `data.taskId` as the interaction ID, requests the summary, queries the interaction's task legs to find the real consult destination, resolves that extension or PSTN number to a Webex person, and sends the summary through Webex Messaging.
+This playbook requires an external webhook listener. When the agent starts a consult, Webex Contact Center sends a `task:consulting` webhook to a hosted HTTPS listener. The listener uses the webhook `data.taskId` as the interaction ID, requests the summary, queries the interaction's task legs to find the real consult destination, resolves that extension or PSTN number to a Webex person, and sends the summary through Webex Messaging.
 
 The webhook `data.destination` is the original entry-point DNIS. It is **not** the consult destination and must not be used to select the message recipient.
 
