@@ -75,6 +75,38 @@
   },
   "playbooks": [
     {
+      "id": "configure-custom-data-custom-events-ai-agents",
+      "title": "Configure Custom Data and Custom Events for AI Agents",
+      "summary": "Pass session data to an Autonomous Voice AI Agent, handle source-flow action exits through VAV2, parse MetaData, and return fulfillment data to continue the same conversation.",
+      "verticals": [],
+      "channels": [
+        "voice"
+      ],
+      "features": [
+        "ai-agent-autonomous-voice"
+      ],
+      "customerJourneys": [
+        "customer-service",
+        "self-service",
+        "routing-transfer"
+      ],
+      "integrations": [],
+      "complexity": "intermediate",
+      "lastValidated": "2026-10-01",
+      "keywords": [
+        "autonomous-voice",
+        "custom-data",
+        "custom-events",
+        "eventdatajson",
+        "handled-outcome",
+        "stateeventname",
+        "virtual-agent-v2",
+        "flow-designer"
+      ],
+      "requiresRebinding": false,
+      "url": "playbooks/configure-custom-data-custom-events-ai-agents/"
+    },
+    {
       "id": "consult-summary-to-webex-flow-designer-event",
       "title": "Send Mid Call Consult Summaries to Webex Users with Flow Designer Event",
       "summary": "Use a Webex Contact Center PreDial event and Webex Connect to resolve a consulted Webex user and send that person the MID_CALL summary as a direct Webex message.",
