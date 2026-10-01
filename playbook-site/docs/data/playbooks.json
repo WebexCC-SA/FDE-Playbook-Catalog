@@ -117,7 +117,8 @@
         "voice"
       ],
       "features": [
-        "ai-assistant-dropped-call-and-transfer-summary"
+        "ai-assistant-dropped-call-and-transfer-summary",
+        "ai-assistant-real-time-transcript"
       ],
       "customerJourneys": [
         "routing-transfer"

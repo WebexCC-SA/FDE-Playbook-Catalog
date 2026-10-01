@@ -8,6 +8,7 @@ on:
       - "Playbooks/**"
       - "playbook-site/**"
       - "scripts/build_playbook_catalog.py"
+      - "scripts/scg_taxonomy.py"
       - ".github/workflows/publish-pages.yml"
 
   workflow_dispatch:

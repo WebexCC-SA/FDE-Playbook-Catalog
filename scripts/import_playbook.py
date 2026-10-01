@@ -2,10 +2,10 @@
 """Import one approved FDE playbook package into the public catalog.
 
 The script is intentionally strict: a publication may change exactly one
-``Playbooks/<id>/`` package. A source PR may also change the central taxonomy,
-but the catalog taxonomy must be migrated and reviewed separately before a
-playbook using that taxonomy can be imported. Only README.md, manifest.yaml,
-and files explicitly declared under ``artifacts`` are copied.
+``Playbooks/<id>/`` package. The canonical SCG taxonomy is fetched and parsed
+before each import; no source or catalog taxonomy copy is accepted. Only
+README.md, manifest.yaml, and files explicitly declared under ``artifacts``
+are copied.
 """
 
 from __future__ import annotations
@@ -21,6 +21,8 @@ from typing import Any, Iterable, Sequence
 
 import yaml
 
+from scg_taxonomy import ScgTaxonomyError, load_scg_taxonomy
+
 
 SLUG_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 SECURITY_ATTESTATIONS = (
@@ -28,7 +30,6 @@ SECURITY_ATTESTATIONS = (
     "credentials_removed",
     "tenant_identifiers_removed",
 )
-ALLOWED_SHARED_PATHS = {"Playbooks/taxonomy.yaml"}
 
 
 class ImportFailure(RuntimeError):
@@ -80,9 +81,6 @@ def changed_playbook_id(changed_paths: Sequence[str]) -> str:
         posix_path = PurePosixPath(raw_path)
         if posix_path.is_absolute() or ".." in posix_path.parts:
             unexpected.append(raw_path)
-            continue
-        normalized = posix_path.as_posix()
-        if normalized in ALLOWED_SHARED_PATHS:
             continue
         if len(posix_path.parts) >= 3 and posix_path.parts[0] == "Playbooks":
             playbook_id = posix_path.parts[1]
@@ -175,30 +173,6 @@ def validate_source_package(source_root: Path, playbook_id: str) -> tuple[Path, 
     return package, artifacts
 
 
-def regular_taxonomy(source_root: Path) -> Path:
-    taxonomy = source_root / "Playbooks" / "taxonomy.yaml"
-    if not taxonomy.is_file() or taxonomy.is_symlink():
-        raise ImportFailure("source Playbooks/taxonomy.yaml must be a regular file")
-    load_yaml(taxonomy)
-    return taxonomy
-
-
-def require_matching_taxonomy(source_root: Path, catalog_root: Path) -> None:
-    """Require an explicit catalog migration before using a new taxonomy."""
-
-    source_taxonomy = regular_taxonomy(source_root)
-    catalog_taxonomy = catalog_root / "Playbooks" / "taxonomy.yaml"
-    if not catalog_taxonomy.is_file() or catalog_taxonomy.is_symlink():
-        raise ImportFailure(
-            "catalog Playbooks/taxonomy.yaml must be a regular file"
-        )
-    if load_yaml(source_taxonomy) != load_yaml(catalog_taxonomy):
-        raise ImportFailure(
-            "source and catalog taxonomies differ; merge an explicit catalog "
-            "taxonomy migration before publishing a playbook"
-        )
-
-
 def import_playbook(
     source_root: Path,
     catalog_root: Path,
@@ -208,7 +182,10 @@ def import_playbook(
     catalog_root = catalog_root.resolve()
     playbook_id = changed_playbook_id(changed_paths)
     package, artifacts = validate_source_package(source_root, playbook_id)
-    require_matching_taxonomy(source_root, catalog_root)
+    try:
+        load_scg_taxonomy()
+    except ScgTaxonomyError as exc:
+        raise ImportFailure(str(exc)) from exc
 
     catalog_playbooks = catalog_root / "Playbooks"
     if not catalog_playbooks.is_dir():

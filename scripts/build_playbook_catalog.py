@@ -12,6 +12,8 @@ from typing import Any
 
 import yaml
 
+from scg_taxonomy import load_scg_taxonomy
+
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 PLAYBOOKS_ROOT = REPOSITORY_ROOT / "Playbooks"
@@ -139,10 +141,10 @@ def copy_playbook_page(
 
 
 def build_catalog() -> dict[str, Any]:
-    taxonomy = load_yaml(PLAYBOOKS_ROOT / "taxonomy.yaml")
+    taxonomy = load_scg_taxonomy()
     taxonomy_facets = taxonomy.get("facets")
     if not isinstance(taxonomy_facets, dict):
-        raise ValueError("Playbooks/taxonomy.yaml is missing facets")
+        raise ValueError("SCG taxonomy is missing facets")
 
     records: list[dict[str, Any]] = []
     for playbook_dir in sorted(path for path in PLAYBOOKS_ROOT.iterdir() if path.is_dir()):

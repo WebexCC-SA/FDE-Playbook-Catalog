@@ -9,6 +9,7 @@ on:
       - "playbook-site/**"
       - "scripts/build_playbook_catalog.py"
       - "scripts/import_playbook.py"
+      - "scripts/scg_taxonomy.py"
       - "tests/**"
       - ".github/workflows/validate-catalog.yml"
   workflow_dispatch:
