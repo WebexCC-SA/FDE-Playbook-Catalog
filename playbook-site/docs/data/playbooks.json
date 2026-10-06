@@ -65,7 +65,8 @@
       "custom-crm",
       "database",
       "webhook",
-      "a2a"
+      "a2a",
+      "jds"
     ],
     "complexity": [
       "beginner",
@@ -198,6 +199,39 @@
       ],
       "requiresRebinding": false,
       "url": "playbooks/post-call-ai-summary-reporting/"
+    },
+    {
+      "id": "post-call-ai-summary-to-jds",
+      "title": "Post-Call AI Assistant Summary to Customer Journey Data",
+      "summary": "Retrieve the completed voice interaction wrap-up summary and publish selected summary fields to a Webex Contact Center Customer Journey Data project.",
+      "verticals": [
+        "wholesale-distribution"
+      ],
+      "channels": [
+        "voice"
+      ],
+      "features": [
+        "ai-assistant-real-time-transcript",
+        "ai-assistant-wrap-up-summary"
+      ],
+      "customerJourneys": [
+        "customer-service"
+      ],
+      "integrations": [
+        "jds",
+        "rest-api"
+      ],
+      "complexity": "intermediate",
+      "lastValidated": "2026-10-06",
+      "keywords": [
+        "post-call-summary",
+        "customer-journey-data",
+        "jds-event",
+        "flow-designer",
+        "wrap-up"
+      ],
+      "requiresRebinding": false,
+      "url": "playbooks/post-call-ai-summary-to-jds/"
     }
   ]
 }
