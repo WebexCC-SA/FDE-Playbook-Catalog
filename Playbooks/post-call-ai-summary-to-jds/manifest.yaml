@@ -34,12 +34,18 @@ keywords:
 artifacts:
   flows:
     - flows/PostCallSummary_toJDS_V3.json
-  settings: []
-  samples: []
+    - screenshots/02-subflow-overview.png
+    - screenshots/06-phone-contact-ended-mapping.png
+  settings:
+    - screenshots/03-jds-project-id.png
+    - screenshots/04-subflows-list.png
+    - screenshots/05-journey-projects.png
+  samples:
+    - screenshots/01-supervisor-jds-event.png
   tests: []
 
 validation:
-  environment: Webex Contact Center voice tenant with AI Assistant wrap-up summaries, Customer Journey Data enabled, Flow Designer, and an authenticated HTTP connector.
+  environment: Webex Contact Center voice tenant with AI Assistant wrap-up summaries, Customer Journey Data, Flow Designer, and an authenticated HTTP connector.
   expected_result: After agent wrap-up completes, the subflow retrieves the interaction summary and posts the configured summary fields to the selected JDS project; the event is visible for the interaction in Supervisor Desktop.
 
 security:

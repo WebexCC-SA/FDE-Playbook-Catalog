@@ -6,11 +6,9 @@ This playbook shows how to publish selected Webex Contact Center AI Assistant wr
 
 The current example posts summary data and a phone identity to JDS. The same pattern can be extended to include transcript text, wrap-up codes, or other interaction details by updating the flow mappings and event payload. Those additions are not included or validated in this example.
 
-**Related FDE engagement:** [CCC-3730](https://imimobile.atlassian.net/browse/CCC-3730)
-
 ## Owner and maintenance
 
-- Authors and co-writers: `Dimitri` and Scott Osborne; Scott initially designed and tested this solution.
+- Authors and co-writers: `Dimitri` and Scott Osborne who initially designed and tested this solution.
 - FDE owner: `dbokatov`
 - FDE Team Lead reviewer and maintaining team: FDE Team
 - Last validated: 2026-10-06
@@ -69,16 +67,29 @@ The subflow posts summary fields. It does not post the complete transcript in th
 3. Open **Journey Projects** and create a project if the target project does not already exist.
 4. Copy the target **Project ID**. JDS APIs refer to this project identifier as the workspace ID.
 
+![Customer Journey Data Journey Projects screen with the lab Project IDs visible](screenshots/05-journey-projects.png)
+
 ### 2. Import the subflow
 
 1. In Control Hub, go to **Contact Center → Flows → Subflows**.
-2. Open **Manage Subflows** and import `flows/PostCallSummary_toJDS_V3.json`.
+2. Open **Manage Subflows** and import [`PostCallSummary_toJDS_V3.json`](flows/PostCallSummary_toJDS_V3.json) from this playbook.
 3. Open the imported `PostCallSummary_toJDS_V3` subflow in Flow Designer.
-4. In the `Setup_vars` activity, set `jds_workspaceId` to the target Journey Project ID.
-5. For each HTTP Request activity, select an authenticated HTTP connector from the target organization and verify its authorization. Do not place client secrets or access tokens in flow variables or literal request fields.
-6. Save the subflow and publish it when the tenant's change process allows.
 
-### 3. Add the subflow to the main flow
+![Contact Center Subflows list from the lab tenant](screenshots/04-subflows-list.png)
+
+The supplied subflow's activity sequence is shown below. It waits for wrap-up completion, retrieves the summary by interaction/task ID, resolves the agent identity, and posts the summary to JDS.
+
+![Post-call summary to JDS subflow overview](screenshots/02-subflow-overview.png)
+
+### 3. Set the JDS Project ID and connector
+
+1. In the `Setup_vars` activity, set `jds_workspaceId` to the target Journey Project ID.
+2. For each HTTP Request activity, select an authenticated HTTP connector from the target organization and verify its authorization.
+3. Do not place client secrets or access tokens in flow variables or literal request fields.
+
+![Flow Designer Setup_vars activity with the lab Journey Project ID visible](screenshots/03-jds-project-id.png)
+
+### 4. Add the subflow to the main flow
 
 1. Open the main inbound voice flow in Flow Designer.
 2. Open its **Event flows** and select the `PhoneContactEnded` event.
@@ -92,29 +103,35 @@ The subflow posts summary fields. It does not post the complete transcript in th
    | `PhoneContactEnded.AgentID` | `agentId` |
    | `NewPhoneContact.OrgId` | `orgID` |
 
-5. Save and publish the main flow.
+5. Save the main flow.
 
-### 4. Check the JDS event payload
+![PhoneContactEnded event and subflow input mappings from the lab tenant](screenshots/06-phone-contact-ended-mapping.png)
 
-The example sets the JDS project through `jds_workspaceId`, derives the event reference from the organization, interaction/task, and agent identifiers, and posts summary fields including the initial contact reason, additional context, and key actions taken. Review the `TrimPayloads` and `Post_JDS` activities before adapting the field set. Keep the payload limited to approved business data.
+### 5. Publish and validate
 
-The activity sequence waits for the wrap-up to complete before retrieving the post-call summary. If you extend the payload to include transcript text or other data, update the corresponding variable handling and request body, then perform a separate privacy and retention review.
-
-## Validation
-
-1. Confirm both the subflow and main flow are published and the subflow is attached to `PhoneContactEnded` with all four mappings above.
+1. Save and publish the subflow and main flow according to the tenant's change process.
 2. Place an inbound test call to a queue with AI Assistant wrap-up summary enabled.
 3. Complete the agent wrap-up and allow the flow's summary polling to finish.
 4. In Supervisor Desktop, open the completed interaction and inspect **Additional Information → Customer Journey**.
-5. Confirm a JDS event appears for the interaction and contains the expected summary fields. The exact event time depends on when the wrap-up and summary become available.
+5. Confirm a JDS event appears for the interaction and contains the expected summary fields.
 
-Expected result: a JDS event associated with the interaction is visible in Supervisor Desktop. This playbook package has not been exercised against a live tenant; follow the validation steps in the target organization before production use.
+![Supervisor Desktop Customer Journey and JDS Event panels with lab interaction data visible](screenshots/01-supervisor-jds-event.png)
+
+**JDS Event API:** This is the AI Assistant high-value summarization capability. It can provide editable, detailed summaries customized for an interaction type, such as post-call wrap-up, mid-call transfer or consult, dropped-call recovery, and AI Agent handoff. This example adds the summary to JDS by sending an HTTP `POST` request.
+
+**AI Memory:** This is a separate feature in the Customer Journey widget. It provides a one-line “last interaction” snapshot to help an agent quickly understand the customer journey. It is not a summary product, is not customizable, and does not replace AI Assistant summaries.
+
+Expected result: a JDS event associated with the interaction is visible in Supervisor Desktop. The exact event time depends on when the wrap-up and summary become available. The screenshot shows the successful result for the supplied lab interaction.
+
+## Validation
+
+Follow implementation step 5 in a test queue after publishing both flows. Confirm that the completed interaction has a JDS event with the expected summary fields in Supervisor Desktop. This package has not been exercised against a live tenant; perform this validation in the target organization before production use.
 
 ## Security and privacy
 
-- The included flow is sanitized: organization and Journey Project identifiers, source-account identity, and tenant-specific connector bindings were removed or replaced.
-- Select the target tenant's authenticated connector in each HTTP Request activity and enter its own Journey Project ID before use.
-- Keep credentials in the connector's authentication configuration. Do not export credentials or tokens with the flow.
+- The included flow JSON and screenshots retain the identifiers and interaction details visible in the supplied lab-tenant materials, including organization and Journey Project IDs, caller number, interaction ID, sample conversation content, account identity, and flow identity. They are intentionally unredacted at the author's direction for lab use.
+- No credentials, access tokens, or secrets were found in the supplied flow JSON during review. Keep credentials in the connector's authentication configuration; do not add credentials or tokens to flow variables, request fields, or screenshots.
+- Before adapting this package outside the lab tenant, replace the organization and Journey Project IDs, select the target organization's authenticated connector in each HTTP Request activity, and remove or replace the sample caller, interaction, agent/account, and conversation values in any materials you redistribute.
 - Review which summary fields are sent to JDS and apply the organization's data minimization, retention, access-control, and privacy requirements.
 - The example sends post-call summary data and phone identity; it does not send full transcript text as supplied.
 - Adding transcript text, wrap-up codes, or other details changes the data sent. Review the resulting payload and access policy before enabling those fields.
@@ -133,4 +150,3 @@ Expected result: a JDS event associated with the interaction is visible in Super
 
 - [Customer Journey Data getting started](https://developer.webex.com/webex-contact-center/docs/journey-getting-started)
 - [Webex Contact Center APIs](https://developer.webex.com/docs/contact-center)
-- [FDE engagement CCC-3730](https://imimobile.atlassian.net/browse/CCC-3730)
