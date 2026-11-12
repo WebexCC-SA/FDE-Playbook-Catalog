@@ -173,6 +173,38 @@
       "url": "playbooks/consult-transfer-summary-to-webex/"
     },
     {
+      "id": "google-maps-mcp-autonomous-voice-sms",
+      "title": "Implement Google Maps MCP and SMS Fulfillment in a Webex Autonomous Voice Agent",
+      "summary": "Configure Google Maps MCP for location search and route estimates, then use a Webex Connect fulfillment flow to search Google Places and send a selected location link to a customer by SMS.",
+      "verticals": [],
+      "channels": [
+        "voice",
+        "sms"
+      ],
+      "features": [
+        "ai-agent-autonomous-voice"
+      ],
+      "customerJourneys": [
+        "self-service"
+      ],
+      "integrations": [
+        "rest-api",
+        "mcp"
+      ],
+      "complexity": "intermediate",
+      "lastValidated": "2026-11-11",
+      "keywords": [
+        "google-maps",
+        "maps-mcp",
+        "places-text-search",
+        "sms-fulfillment",
+        "webex-connect",
+        "autonomous-voice"
+      ],
+      "requiresRebinding": false,
+      "url": "playbooks/google-maps-mcp-autonomous-voice-sms/"
+    },
+    {
       "id": "post-call-ai-summary-reporting",
       "title": "Retrieve AI Assistant Post-Call Summaries for Supervisor Reporting",
       "summary": "Retrieve AI Assistant wrap-up summaries after contact completion and expose selected fields through a historical Analyzer report for supervisor visibility.",
